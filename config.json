@@ -1,0 +1,11 @@
+{
+  "model": "gpt-4.1-mini",
+  "context_window_tokens": 1047576,
+  "working_context_tokens": 100000,
+  "sections": 4,
+  "read_budget_chars": 48000,
+  "chunk_chars": 2000,
+  "max_rounds": 2,
+  "output_tokens_per_section": 3200,
+  "roles": ["고조선·삼국·남북국의 국가 형성", "고려의 제도·사회·대외 관계", "조선의 통치·문화·변화", "근대 전환·주권·독립운동"]
+}

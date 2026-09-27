@@ -1,0 +1,11 @@
+{
+  "unit_tests": 16,
+  "final_experiments": 15,
+  "repeats_per_condition": 3,
+  "all_source_ranges_match": true,
+  "all_evidence_quotes_verified": true,
+  "unread_citations": 0,
+  "baseline_read_budgets_match": true,
+  "browser_run": "ea42001186f4",
+  "semantic_accuracy_automatically_verified": false
+}

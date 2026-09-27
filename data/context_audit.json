@@ -1,0 +1,13 @@
+{
+  "documents": 80,
+  "characters": 1607230,
+  "tokens": 1067701,
+  "tokenizer": "o200k_base",
+  "model": "gpt-4.1-mini",
+  "model_context_window": 1047576,
+  "exceeds_model_window": true,
+  "working_context_tokens": 100000,
+  "exceeds_working_context": true,
+  "min_document_characters": 3025,
+  "invalid_links": []
+}

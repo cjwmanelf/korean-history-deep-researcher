@@ -1,0 +1,156 @@
+[
+  {
+    "repeat": 0,
+    "variant": "full",
+    "id": "9018e7aa2a96",
+    "metrics": {
+      "read_chars": 42000,
+      "worker_source_chars_presented": 124411,
+      "input_tokens": 123113,
+      "output_tokens": 8449,
+      "parallel_overlap_seconds": 6.8877434730529785,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 858,
+      "unique_documents": 13,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.23809523809523808,
+      "mean_document_overlap": 0.10000000000000002,
+      "budget_utilization": 0.875,
+      "unresolved_sections": 3,
+      "revision_attempts": 3,
+      "report_chars": 7436
+    }
+  },
+  {
+    "repeat": 0,
+    "variant": "no_territory",
+    "id": "58e22ab73230",
+    "metrics": {
+      "read_chars": 36000,
+      "worker_source_chars_presented": 99126,
+      "input_tokens": 95166,
+      "output_tokens": 6703,
+      "parallel_overlap_seconds": 7.6724724769592285,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 664,
+      "unique_documents": 15,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.25,
+      "mean_document_overlap": 0.09015151515151515,
+      "budget_utilization": 0.75,
+      "unresolved_sections": 2,
+      "revision_attempts": 2,
+      "report_chars": 7169
+    }
+  },
+  {
+    "repeat": 0,
+    "variant": "no_links",
+    "id": "9a248a23b72f",
+    "metrics": {
+      "read_chars": 30000,
+      "worker_source_chars_presented": 74265,
+      "input_tokens": 69039,
+      "output_tokens": 5003,
+      "parallel_overlap_seconds": 5.133090972900391,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 664,
+      "unique_documents": 8,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.3076923076923077,
+      "mean_document_overlap": 0.0,
+      "budget_utilization": 0.625,
+      "unresolved_sections": 1,
+      "revision_attempts": 1,
+      "report_chars": 5922
+    }
+  },
+  {
+    "repeat": 0,
+    "variant": "no_revision",
+    "id": "7c4a96823685",
+    "metrics": {
+      "read_chars": 24000,
+      "worker_source_chars_presented": 47097,
+      "input_tokens": 44602,
+      "output_tokens": 4365,
+      "parallel_overlap_seconds": 5.791807413101196,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 664,
+      "unique_documents": 10,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.2375,
+      "mean_document_overlap": 0.10000000000000002,
+      "budget_utilization": 0.5,
+      "unresolved_sections": 0,
+      "revision_attempts": 0,
+      "report_chars": 6514
+    }
+  },
+  {
+    "repeat": 0,
+    "variant": "baseline",
+    "id": "6b6eb05b0df5",
+    "metrics": {
+      "read_chars": 42000,
+      "worker_source_chars_presented": 82408,
+      "input_tokens": 70347,
+      "output_tokens": 3682,
+      "parallel_overlap_seconds": 0,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 0,
+      "unique_documents": 21,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.26666666666666666,
+      "mean_document_overlap": 0.0,
+      "budget_utilization": 1.0,
+      "unresolved_sections": 0,
+      "revision_attempts": 0,
+      "report_chars": 6532
+    }
+  },
+  {
+    "repeat": 1,
+    "variant": "full",
+    "id": "015241e1bf2a",
+    "metrics": {
+      "read_chars": 36000,
+      "worker_source_chars_presented": 99269,
+      "input_tokens": 98777,
+      "output_tokens": 6436,
+      "parallel_overlap_seconds": 5.577725648880005,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 858,
+      "unique_documents": 14,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.3076923076923077,
+      "mean_document_overlap": 0.020833333333333332,
+      "budget_utilization": 0.75,
+      "unresolved_sections": 2,
+      "revision_attempts": 2,
+      "report_chars": 6354
+    }
+  },
+  {
+    "repeat": 1,
+    "variant": "no_territory",
+    "id": "5cea5b0e5a14",
+    "metrics": {
+      "read_chars": 42000,
+      "worker_source_chars_presented": 126179,
+      "input_tokens": 122440,
+      "output_tokens": 8132,
+      "parallel_overlap_seconds": 6.1116721630096436,
+      "coordinator_raw_chars": 0,
+      "coordinator_catalog_chars": 1074,
+      "unique_documents": 20,
+      "unread_citations": 0,
+      "citation_sentence_ratio": 0.24691358024691357,
+      "mean_document_overlap": 0.020833333333333332,
+      "budget_utilization": 0.875,
+      "unresolved_sections": 3,
+      "revision_attempts": 3,
+      "report_chars": 7923
+    }
+  }
+]
