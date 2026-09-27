@@ -64,8 +64,37 @@ def show(result):
                         st.link_button('원문 출처',corpus['metadata'][r['title']]['url'])
                 st.json(w['history'],expanded=False)
     with metrics_tab:
-        st.json(result['metrics'])
+        m = result.get('metrics', {})
+        col1, col2, col3, col4 = st.columns(4)
+        citation_ratio = m.get('citation_sentence_ratio', 0) * 100
+        unread = m.get('unread_citations', 0)
+        overlap = m.get('mean_document_overlap', 0) * 100
+        docs_count = m.get('unique_documents', 0)
+        
+        col1.metric("근거율", f"{citation_ratio:.1f}%", help="인용 출처가 명시된 문장의 비율")
+        col2.metric("허위 인용 (경보)", f"{unread}건", delta="정상" if unread == 0 else f"{unread}건 오류", delta_color="normal" if unread == 0 else "inverse", help="읽지 않은 문서를 본문에 허위로 인용한 건수 (0건이어야 정상)")
+        col3.metric("문서 중복률", f"{overlap:.1f}%", help="서브에이전트 간 중복해서 읽은 문서의 비율")
+        col4.metric("열람 문서 수", f"{docs_count}건", help="조사관들이 실제로 읽고 검토한 고유 문서 수")
+        
+        st.divider()
+        st.subheader("세부 진단 항목")
+        import pandas as pd
+        detail_data = [
+            {"지표 항목": "읽은 총 글자수", "측정값": f"{m.get('read_chars', 0):,}자", "설명": "조사관들이 실제로 읽은 본문 분량"},
+            {"지표 항목": "최종 보고서 분량", "측정값": f"{m.get('report_chars', 0):,}자", "설명": "종합 작성된 최종 리서치 보고서 글자수"},
+            {"지표 항목": "예산 활용률", "측정값": f"{m.get('budget_utilization', 0)*100:.1f}%", "설명": "배정된 조사 읽기 예산 대비 사용률"},
+            {"지표 항목": "재작성 / 재위임", "측정값": f"{m.get('revision_attempts', 0)}회", "설명": "부족한 절에 대한 추가 탐색 및 재작성 횟수"},
+            {"지표 항목": "미해결 절 수", "측정값": f"{m.get('unresolved_sections', 0)}개", "설명": "최종 점검 후에도 충분한 근거를 찾지 못한 절"},
+            {"지표 항목": "코디네이터 원문 열람", "측정값": f"{m.get('coordinator_raw_chars', 0):,}자", "설명": "코디네이터가 직접 읽은 원문 (0자여야 완벽한 격리)"},
+            {"지표 항목": "코디네이터 카드 분량", "측정값": f"{m.get('coordinator_catalog_chars', 0):,}자", "설명": "기획 시 코디네이터가 본 문서 카드 요약 분량"},
+            {"지표 항목": "병렬 겹침 시간", "측정값": f"{m.get('parallel_overlap_seconds', 0):.1f}초", "설명": "서브에이전트들이 동시 병렬로 작업한 시간"},
+            {"지표 항목": "소비 토큰 (입력 / 출력)", "측정값": f"{m.get('input_tokens', 0):,} / {m.get('output_tokens', 0):,}", "설명": "LLM API 호출 시 사용된 토큰 수"},
+        ]
+        st.dataframe(pd.DataFrame(detail_data), use_container_width=True, hide_index=True)
         st.warning('지표는 오류와 중복을 찾는 신호입니다. 점수가 높다고 역사적으로 더 정확한 보고서는 아닙니다.')
+        with st.expander('원시 JSON 데이터 확인 (개발자용)'):
+            st.json(result['metrics'])
+
 
 paths=sorted((ROOT/'output/reports').glob('*/trace.json'),key=lambda p:p.stat().st_mtime,reverse=True)
 if mode=='새 연구':
@@ -96,4 +125,33 @@ else:
                 p=st.selectbox('비교 대상',paths,index=i,key=f'compare{i}',format_func=lambda p:p.parent.name)
                 r=json.loads(p.read_text(encoding='utf-8'))
                 st.caption(str(r['switches'])); st.markdown(r['report'])
-    if (ROOT/'output/ablation.json').exists(): st.dataframe(load('output/ablation.json'))
+    if (ROOT/'output/ablation.json').exists():
+        st.subheader('실험 조건별 측정 지표 비교')
+        import pandas as pd
+        ab_data = load('output/ablation.json')
+        variant_labels = {
+            'full': '전체 기능 (Full)',
+            'no_territory': '구역 해제 (No Territory)',
+            'no_links': '링크 해제 (No Links)',
+            'no_revision': '재위임 해제 (No Revision)',
+            'baseline': '단일 모델 (Baseline)'
+        }
+        flat_rows = []
+        for r in ab_data:
+            m = r.get('metrics', {})
+            flat_rows.append({
+                '반복': r.get('repeat', 0) + 1,
+                '실험 조건': variant_labels.get(r.get('variant'), r.get('variant')),
+                '실행 ID': r.get('id', ''),
+                '근거율': f"{m.get('citation_sentence_ratio', 0) * 100:.1f}%",
+                '허위 인용': f"{m.get('unread_citations', 0)}건",
+                '문서 중복률': f"{m.get('mean_document_overlap', 0) * 100:.1f}%",
+                '열람 문서': f"{m.get('unique_documents', 0)}건",
+                '읽은 글자': f"{m.get('read_chars', 0):,}자",
+                '보고서 분량': f"{m.get('report_chars', 0):,}자",
+                '재작성': f"{m.get('revision_attempts', 0)}회",
+                '입력 토큰': f"{m.get('input_tokens', 0):,}",
+                '출력 토큰': f"{m.get('output_tokens', 0):,}"
+            })
+        st.dataframe(pd.DataFrame(flat_rows), use_container_width=True, hide_index=True)
+
